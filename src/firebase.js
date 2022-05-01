@@ -1,6 +1,6 @@
+import { useState,useEffect } from "react";
 import { initializeApp } from "firebase/app";
-
-import {getAuth,createUserWithEmailAndPassword} from "firebase/auth"
+import {getAuth,createUserWithEmailAndPassword,onAuthStateChanged} from "firebase/auth"
 
 
 
@@ -17,6 +17,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
+//save
 export const signup= (email,password) => {
  return createUserWithEmailAndPassword(auth,email,password)
+}
+
+//hook
+export const useAuth = ()=>{
+  const [currentUser,setCurrentUser]=useState();
+
+  useEffect(() => {
+    const unsub= onAuthStateChanged(auth,user => setCurrentUser(user));
+    return unsub;
+  }, [])
+  
+  return currentUser;
 }
