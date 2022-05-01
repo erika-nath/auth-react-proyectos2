@@ -1,15 +1,28 @@
 import './App.css';
 import {signup} from "./firebase"
-import {useRef} from "react"
+import {useRef, useState} from "react"
 
 
 export default function App() {
+//estado
+const [loading,setLoading] =useState(false);
+
+//se hace referencia a inputs
   const emailRef = useRef();
   const passwordRef= useRef();
 
 const handleSignup = async()=>{
-  await signup(emailRef.current.value,passwordRef.current.value)
 
+setLoading(true);
+    try{
+      await signup(emailRef.current.value,passwordRef.current.value)
+
+    }catch{
+      alert('Error');
+    }
+
+setLoading(false);
+ 
 }
 //
 
