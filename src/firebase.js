@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import {getAuth,createUserWithEmailAndPassword,onAuthStateChanged} from "firebase/auth"
+import {getAuth,createUserWithEmailAndPassword,onAuthStateChanged, signOut} from "firebase/auth"
 
 
 
@@ -22,6 +22,10 @@ export const signup= (email,password) => {
  return createUserWithEmailAndPassword(auth,email,password)
 }
 
+export const logout= ()=>{
+    return signOut(auth);
+}
+
 //hook
 export const useAuth = ()=>{
   const [currentUser,setCurrentUser]=useState();
@@ -33,3 +37,4 @@ export const useAuth = ()=>{
   
   return currentUser;
 }
+

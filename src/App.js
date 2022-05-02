@@ -1,5 +1,5 @@
 import './App.css';
-import {signup,useAuth} from "./firebase"
+import {signup,useAuth,logout} from "./firebase"
 import {useRef, useState} from "react"
 
 
@@ -26,6 +26,18 @@ setLoading(true);
 setLoading(false);
  
 }
+
+
+const handleLogout = async()=>{
+  setLoading(true);
+try{
+  await logout();
+}catch{
+  alert('Error');
+}
+setLoading(false);
+}
+
 //
 
   return (
@@ -37,6 +49,8 @@ setLoading(false);
     <input ref={passwordRef} type="password" placeholder='Password'/>
     </div>
     <button disabled={loading|| currentUser} onClick={handleSignup}>Sign Up</button>
+    <button disabled={loading|| !currentUser} onClick={handleLogout}>Log Out</button>
+
     </div>
   );
 }
