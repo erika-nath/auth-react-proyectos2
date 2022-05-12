@@ -27,11 +27,24 @@ setLoading(false);
  
 }
 
-
 const handleLogout = async()=>{
   setLoading(true);
+      try{
+        await logout()
+  
+      }catch{
+        alert('Error');
+      }
+  
+  setLoading(false);
+   
+  }
+
+
+const handleLogin = async()=>{
+  setLoading(true);
 try{
-  await logout();
+  await signup(emailRef.current.value,passwordRef.current.value);
 }catch{
   alert('Error');
 }
